@@ -1,0 +1,15 @@
+.canvas-control {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 10rem 1fr;
+  min-width: 40rem;
+  border-right: 1px gray solid;
+}
+
+.canvas-control button {
+  margin: 0 0.5rem;
+}
+
+.current-image {
+  margin: auto 0;
+}

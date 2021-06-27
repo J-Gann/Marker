@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import Navbar from "react-bootstrap/Navbar";
+import { useState } from "react";
+import Canvas from "./components/canvas/Canvas";
+import Editor from "./components/editor/Editor";
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [markers, setMarkers] = useState({});
+
+  const handleNewImages = (newImages) => setImages(newImages);
+  const handleNewMarkers = (newMarkers) => setMarkers(newMarkers);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div id="app-navigation">
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand>Marker Visualization</Navbar.Brand>
+        </Navbar>
+      </div>
+      <div id="app-container">
+        <Canvas images={images} markers={markers}></Canvas>
+        <Editor
+          handleNewImages={handleNewImages}
+          images={images}
+          handleNewMarkers={handleNewMarkers}
+          markers={markers}
+        ></Editor>
+      </div>
+    </>
   );
 }
 

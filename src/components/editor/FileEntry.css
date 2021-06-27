@@ -1,0 +1,21 @@
+.file-entry {
+  margin: 0.5rem;
+  border-radius: 0.6rem;
+  padding: 0.5rem;
+  cursor: default;
+  background-color: floralwhite;
+}
+
+.file-entry :hover {
+  background-color: white;
+}
+
+.file-entry p {
+  vertical-align: baseline;
+  display: inline;
+}
+
+.file-entry button {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
