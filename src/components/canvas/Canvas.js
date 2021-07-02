@@ -4,7 +4,7 @@ import { Stage, Layer, Rect, Circle, Image } from "react-konva";
 import "./Canvas.css";
 import CanvasControl from "./CanvasControl";
 
-const Canvas = ({ images, markers }) => {
+const Canvas = ({ images, markers, setMarker }) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const canvasContainer = useRef(null);
   const [currentImage, setCurrentImage] = useState(0);
@@ -58,7 +58,7 @@ const Canvas = ({ images, markers }) => {
     if (images[currentImage]) {
       const img = images[currentImage];
       if (markers[img.name]) {
-        const img = images[currentImage];
+        let img = images[currentImage];
         const scaleWidth = size.width / img.width;
         const scaleHeight = size.height / img.height;
         const scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
@@ -67,13 +67,22 @@ const Canvas = ({ images, markers }) => {
         const height = img.height * scale;
         const offsetY = (size.height - height) / 2;
         const currentMarkers = markers[img.name];
-        return currentMarkers.map(({ x, y }) => {
+        return currentMarkers.map(({ id, x, y }) => {
           return (
             <Circle
               x={x * scale + offsetX}
               y={y * scale + offsetY}
               radius={10 * scale}
               fill="red"
+              draggable="true"
+              onDragEnd={(e) =>
+                setMarker(
+                  img.name,
+                  id,
+                  e.target.x() / scale - offsetX,
+                  e.target.y() / scale - offsetY
+                )
+              }
             ></Circle>
           );
         });

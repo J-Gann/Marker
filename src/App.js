@@ -12,6 +12,15 @@ function App() {
   const handleNewImages = (newImages) => setImages(newImages);
   const handleNewMarkers = (newMarkers) => setMarkers(newMarkers);
 
+  const setMarker = (imageName, markerID, x, y) => {
+    markers[imageName].forEach((marker) => {
+      if (marker.id === markerID) {
+        marker.x = x;
+        marker.y = y;
+      }
+    });
+  };
+
   return (
     <>
       <div id="app-navigation">
@@ -20,7 +29,11 @@ function App() {
         </Navbar>
       </div>
       <div id="app-container">
-        <Canvas images={images} markers={markers}></Canvas>
+        <Canvas
+          images={images}
+          markers={markers}
+          setMarker={setMarker}
+        ></Canvas>
         <Editor
           handleNewImages={handleNewImages}
           images={images}
