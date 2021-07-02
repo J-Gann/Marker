@@ -5,20 +5,7 @@ const MarkerEntry = ({ marker, image }) => {
   return (
     <div className="marker-entries">
       {keys.map((key, index) => {
-        if (key === "id") {
-          return (
-            <>
-              <p>{key}: </p>
-              <p key={index}> {marker[key]} </p>
-            </>
-          );
-        }
-        return (
-          <>
-            <label>{key}</label>
-            <input key={index} type="text" value={marker[key]}></input>
-          </>
-        );
+        return <p>{key.toString() + ":" + marker[key].toString() + " "}</p>;
       })}
     </div>
   );
