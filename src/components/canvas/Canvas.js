@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Stage, Layer, Rect, Circle, Image } from "react-konva";
 
 import "./Canvas.css";
 import CanvasControl from "./CanvasControl";
@@ -6,8 +7,7 @@ import CanvasControl from "./CanvasControl";
 const Canvas = ({ images, markers }) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const canvasContainer = useRef(null);
-  const canvasRef = useRef(null);
-  let imageIndex = 0;
+  const [currentImage, setCurrentImage] = useState(0);
 
   // Create hook only once on first render
   useEffect(() => {
@@ -29,15 +29,36 @@ const Canvas = ({ images, markers }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+  const onNextImageIndex = (index) => setCurrentImage(index);
 
-    let animationFrameId;
-    const render = () => {
-      ctx.clearRect(0, 0, size.width, size.height);
-      if (images.length > 0) {
-        const img = images[imageIndex];
+  const renderImage = () => {
+    if (images[currentImage]) {
+      const img = images[currentImage];
+      const scaleWidth = size.width / img.width;
+      const scaleHeight = size.height / img.height;
+      const scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
+      const width = img.width * scale;
+      const offsetX = (size.width - width) / 2;
+      const height = img.height * scale;
+      const offsetY = (size.height - height) / 2;
+
+      return (
+        <Image
+          x={0 + offsetX}
+          y={0 + offsetY}
+          width={width}
+          height={height}
+          image={img}
+        ></Image>
+      );
+    }
+  };
+
+  const renderMarkers = () => {
+    if (images[currentImage]) {
+      const img = images[currentImage];
+      if (markers[img.name]) {
+        const img = images[currentImage];
         const scaleWidth = size.width / img.width;
         const scaleHeight = size.height / img.height;
         const scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
@@ -45,50 +66,35 @@ const Canvas = ({ images, markers }) => {
         const offsetX = (size.width - width) / 2;
         const height = img.height * scale;
         const offsetY = (size.height - height) / 2;
-
-        ctx.drawImage(img, 0 + offsetX, 0 + offsetY, width, height);
-
-        if (markers[img.name]) {
-          markers[img.name].forEach(({ x, y }) => {
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.arc(
-              x * scale + offsetX,
-              y * scale + offsetY,
-              6,
-              0,
-              2 * Math.PI
-            );
-            ctx.fill();
-          });
-        }
+        const currentMarkers = markers[img.name];
+        return currentMarkers.map(({ x, y }) => {
+          return (
+            <Circle
+              x={x * scale + offsetX}
+              y={y * scale + offsetY}
+              radius={10 * scale}
+              fill="red"
+            ></Circle>
+          );
+        });
       }
-
-      animationFrameId = window.requestAnimationFrame(render);
-    };
-    render();
-
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  });
-
-  const onNextImageIndex = (index) => (imageIndex = index);
+    }
+  };
 
   return (
     <div className="canvas">
       <div ref={canvasContainer} className="canvas-container">
-        <canvas
-          className="canvas"
-          ref={canvasRef}
-          width={size.width}
-          height={size.height}
-        ></canvas>
+        <Stage className="canvas" width={size.width} height={size.height}>
+          <Layer>
+            {renderImage()}
+            {renderMarkers()}
+          </Layer>
+        </Stage>
       </div>
-      <div className="canvas-control">
+      <div>
         <CanvasControl
           onNextImageIndex={onNextImageIndex}
-          imagesLength={images && images.length}
+          imagesLength={images.length}
         ></CanvasControl>
       </div>
     </div>
