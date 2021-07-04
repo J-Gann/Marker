@@ -9,6 +9,7 @@ const Editor = ({ handleNewImages, handleNewMarkers, images, markers }) => {
         <LoadFiles
           handleNewImages={handleNewImages}
           handleNewMarkers={handleNewMarkers}
+          markers={markers}
         ></LoadFiles>
       </div>
       <div className="editor-display">
