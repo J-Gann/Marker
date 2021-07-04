@@ -95,6 +95,58 @@ const Canvas = ({ images, markers, setMarker }) => {
     });
   };
 
+  const renderMarkerLineHistory = (index, size, color) => {
+    if (images[currentImage]) {
+      const img = images[currentImage];
+      const currentMarkers = markers[img.name];
+      if (currentMarkers) {
+        const markerKeys = Object.keys(currentMarkers);
+        return markerKeys.map((key) => {
+          if (key !== "id") {
+            let points = [];
+            for (let cnt = index - size; cnt < index; cnt++) {
+              if (images[cnt]) {
+                const img = images[cnt];
+                const currentMarkers = markers[img.name];
+                const currentMarker = currentMarkers[key];
+                points.push(currentMarker["x"] * scale + offsetX);
+                points.push(currentMarker["y"] * scale + offsetY);
+              }
+            }
+            console.log(points);
+            return <Line points={points} stroke={color} strokeWidth={4}></Line>;
+          }
+        });
+      }
+    }
+  };
+
+  const renderMarkerLineFuture = (index, size, color) => {
+    if (images[currentImage]) {
+      const img = images[currentImage];
+      const currentMarkers = markers[img.name];
+      if (currentMarkers) {
+        const markerKeys = Object.keys(currentMarkers);
+        return markerKeys.map((key) => {
+          if (key !== "id") {
+            let points = [];
+            for (let cnt = index + 1; cnt < index + size + 1; cnt++) {
+              if (images[cnt]) {
+                const img = images[cnt];
+                const currentMarkers = markers[img.name];
+                const currentMarker = currentMarkers[key];
+                points.push(currentMarker["x"] * scale + offsetX);
+                points.push(currentMarker["y"] * scale + offsetY);
+              }
+            }
+            console.log(points);
+            return <Line points={points} stroke={color} strokeWidth={4}></Line>;
+          }
+        });
+      }
+    }
+  };
+
   const renderMarkerFuture = (index, size, radius, color) => {
     const indices = [];
     for (let cnt = index + 1; cnt < index + size + 1; cnt++) indices.push(cnt);
@@ -111,7 +163,9 @@ const Canvas = ({ images, markers, setMarker }) => {
             {renderImage(currentImage)}
             {renderMarkers(currentImage, 10, "red", true)}
             {renderMarkerHistory(currentImage, 10, 4, "green", false)}
+            {renderMarkerLineHistory(currentImage, 10, "green")}
             {renderMarkerFuture(currentImage, 10, 4, "blue", false)}
+            {renderMarkerLineFuture(currentImage, 10, "blue")}
           </Layer>
         </Stage>
       </div>
