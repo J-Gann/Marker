@@ -42,7 +42,9 @@ const CanvasControl = ({ onNextImageIndex, imagesLength }) => {
           onClick={() => {
             setPlay(false);
             setImageIndex((currentIndex) =>
-              currentIndex !== imagesLength ? currentIndex + 1 : currentIndex
+              currentIndex !== imagesLength + 1
+                ? currentIndex + 1
+                : currentIndex
             );
           }}
         >
