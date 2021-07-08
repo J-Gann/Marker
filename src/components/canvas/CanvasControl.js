@@ -25,7 +25,16 @@ const CanvasControl = ({ onNextImageIndex, imagesLength }) => {
   return (
     <div className="canvas-control">
       <div className="current-image">
-        Current Image: <b>{imageIndex}</b>
+        Current Image:
+        <input
+          type="number"
+          value={imageIndex}
+          onInput={(e) => {
+            const number = Number.parseInt(e.target.value);
+            if (number >= 0 && number <= imagesLength - 1)
+              setImageIndex(Number.parseInt(e.target.value));
+          }}
+        />
       </div>
       <div>
         <button
