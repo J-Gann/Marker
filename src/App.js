@@ -62,7 +62,9 @@ function App() {
   const removeMarker = (imageName, markerID) => {
     const markerList = getMarkers(imageName);
     const marker = getMarker(imageName, markerID); // Throws if marker not found
-    delete markerList[markerID];
+    markerList.forEach((marker, index) => {
+      if (marker.id === markerID) delete markerList[index];
+    });
     setMarkers({ ...markers });
   };
 

@@ -4,6 +4,17 @@ const MarkerEntry = ({ marker, image, markerOperations }) => {
   return (
     <div className="marker-entries">
       <div>
+        <button
+          className="fa-remove"
+          onClick={() => {
+            console.log("click");
+            markerOperations.removeMarker(image.name, marker.id);
+          }}
+        >
+          X
+        </button>
+      </div>
+      <div>
         <p>id: </p>
         <input
           type="text"

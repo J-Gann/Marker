@@ -15,11 +15,13 @@
   display: inline;
 }
 
-.file-entry__buttons {
-  display: inline-block;
+.file-entry__bar {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr;
+  align-items: baseline;
 }
 
-.file-entry button {
-  margin-left: 0.2rem;
-  margin-bottom: 0.2rem;
+.file-entry__bar button {
+  margin-left: 1rem;
 }

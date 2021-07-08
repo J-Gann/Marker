@@ -164,9 +164,7 @@ const Canvas = ({ images, markers, markerOperations }) => {
           <Layer>
             {renderImage(currentImage)}
             {renderMarkers(currentImage, 10, "red", true)}
-            {renderMarkerHistory(currentImage, 10, 4, "green", false)}
             {renderMarkerLineHistory(currentImage, 10, "green")}
-            {renderMarkerFuture(currentImage, 10, 4, "blue", false)}
             {renderMarkerLineFuture(currentImage, 10, "blue")}
           </Layer>
         </Stage>

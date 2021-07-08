@@ -1,11 +1,16 @@
 .marker-entries {
-    background-color: lightgray;
-    margin-bottom: 0.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+  background-color: lightgray;
+  margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.marker-entries button {
+  margin-right: 1rem;
+  font-size: 0.6rem;
 }
 
 .marker-entries input {
-  width: 3rem;
+  width: 4rem;
 }
