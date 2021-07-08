@@ -4,7 +4,7 @@ import { Stage, Layer, Circle, Image, Line } from "react-konva";
 import "./Canvas.css";
 import CanvasControl from "./CanvasControl";
 
-const Canvas = ({ images, markers, setMarker }) => {
+const Canvas = ({ images, markers, markerOperations }) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const canvasContainer = useRef(null);
   const [currentImage, setCurrentImage] = useState(0);
@@ -73,11 +73,11 @@ const Canvas = ({ images, markers, setMarker }) => {
               fill={color}
               draggable={draggable}
               onDragEnd={(e) =>
-                setMarker(
+                markerOperations.setMarker(
                   img.name,
                   id,
-                  e.target.x() / scale - offsetX,
-                  e.target.y() / scale - offsetY
+                  e.target.x() / scale - offsetX / scale,
+                  e.target.y() / scale - offsetY / scale
                 )
               }
             ></Circle>
@@ -109,11 +109,12 @@ const Canvas = ({ images, markers, setMarker }) => {
                 const img = images[cnt];
                 const currentMarkers = markers[img.name];
                 const currentMarker = currentMarkers[key];
-                points.push(currentMarker["x"] * scale + offsetX);
-                points.push(currentMarker["y"] * scale + offsetY);
+                if (currentMarker) {
+                  points.push(currentMarker["x"] * scale + offsetX);
+                  points.push(currentMarker["y"] * scale + offsetY);
+                }
               }
             }
-            console.log(points);
             return <Line points={points} stroke={color} strokeWidth={4}></Line>;
           }
         });
@@ -135,11 +136,12 @@ const Canvas = ({ images, markers, setMarker }) => {
                 const img = images[cnt];
                 const currentMarkers = markers[img.name];
                 const currentMarker = currentMarkers[key];
-                points.push(currentMarker["x"] * scale + offsetX);
-                points.push(currentMarker["y"] * scale + offsetY);
+                if (currentMarker) {
+                  points.push(currentMarker["x"] * scale + offsetX);
+                  points.push(currentMarker["y"] * scale + offsetY);
+                }
               }
             }
-            console.log(points);
             return <Line points={points} stroke={color} strokeWidth={4}></Line>;
           }
         });
@@ -173,6 +175,7 @@ const Canvas = ({ images, markers, setMarker }) => {
         <CanvasControl
           onNextImageIndex={onNextImageIndex}
           imagesLength={images.length}
+          markerOperations={markerOperations}
         ></CanvasControl>
       </div>
     </div>

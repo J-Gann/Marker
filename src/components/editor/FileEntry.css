@@ -15,7 +15,11 @@
   display: inline;
 }
 
+.file-entry__buttons {
+  display: inline-block;
+}
+
 .file-entry button {
-  margin-left: 1rem;
-  margin-bottom: 0.5rem;
+  margin-left: 0.2rem;
+  margin-bottom: 0.2rem;
 }

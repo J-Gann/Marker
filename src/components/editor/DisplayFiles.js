@@ -1,8 +1,7 @@
 import "./DisplayFiles.css";
 import FileEntry from "./FileEntry";
 
-const DisplayFiles = ({ images, markers }) => {
-  console.log(images);
+const DisplayFiles = ({ images, markers, markerOperations }) => {
   return (
     <>
       <h3>Images</h3>
@@ -13,6 +12,7 @@ const DisplayFiles = ({ images, markers }) => {
             index={index}
             image={image}
             markers={markers}
+            markerOperations={markerOperations}
           ></FileEntry>
         ))}
       </div>

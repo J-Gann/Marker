@@ -16,7 +16,7 @@ const CanvasControl = ({ onNextImageIndex, imagesLength }) => {
           setImageIndex(() => 0);
         }
       }
-    }, 50);
+    }, 35);
     return () => window.clearInterval(intervalID);
   });
 

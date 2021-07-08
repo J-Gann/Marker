@@ -1,3 +1,11 @@
+.marker-entries {
+    background-color: lightgray;
+    margin-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
 .marker-entries input {
   width: 3rem;
 }
