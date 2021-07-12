@@ -6,14 +6,14 @@ const CanvasControl = ({ setCurrentImage, imagesLength }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const [repeat, setRepeat] = useState(true);
-  const [speed, setSpeed] = useState(30);
+  const [speed, setSpeed] = useState(40);
 
   useEffect(() => {
     const intervalID = window.setInterval(() => {
       if (imagesLength) {
-        if (play && imagesLength - 1 > imageIndex) {
+        if (play && imagesLength > imageIndex) {
           setImageIndex((oldIndex) => oldIndex + 1);
-        } else if (imagesLength - 1 === imageIndex && repeat) {
+        } else if (imagesLength === imageIndex && repeat) {
           setImageIndex(() => 0);
         }
       }
