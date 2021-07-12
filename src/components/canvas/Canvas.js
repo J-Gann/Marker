@@ -80,7 +80,7 @@ const Canvas = ({ images, markers, markerOperations }) => {
     const currentMarkers = markerOperations.getMarkers(img.name);
     return currentMarkers.map(({ id }) => {
       let points1 = [];
-      for (let cnt = currentImage - size; cnt < currentImage; cnt++) {
+      for (let cnt = currentImage - size; cnt <= currentImage; cnt++) {
         const img = images[cnt];
         const currentMarkers = markerOperations.getMarkers(img && img.name);
         const currentMarker = currentMarkers.filter(
@@ -92,7 +92,7 @@ const Canvas = ({ images, markers, markerOperations }) => {
         }
       }
       let points2 = [];
-      for (let cnt = currentImage + 1; cnt < currentImage + size + 1; cnt++) {
+      for (let cnt = currentImage; cnt < currentImage + size + 1; cnt++) {
         const img = images[cnt];
         const currentMarkers = markerOperations.getMarkers(img && img.name);
         const currentMarker = currentMarkers.filter(
