@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./CanvasControl.css";
 
-const CanvasControl = ({ onNextImageIndex, imagesLength }) => {
+const CanvasControl = ({ setCurrentImage, imagesLength }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const [repeat, setRepeat] = useState(true);
+  const [speed, setSpeed] = useState(30);
 
   useEffect(() => {
     const intervalID = window.setInterval(() => {
@@ -16,23 +17,34 @@ const CanvasControl = ({ onNextImageIndex, imagesLength }) => {
           setImageIndex(() => 0);
         }
       }
-    }, 35);
+    }, speed);
     return () => window.clearInterval(intervalID);
   });
 
-  useEffect(() => onNextImageIndex(imageIndex), [imageIndex]);
+  useEffect(() => setCurrentImage(imageIndex), [imageIndex, setCurrentImage]);
 
   return (
     <div className="canvas-control">
       <div className="current-image">
-        Current Image:
+        Image:
         <input
           type="number"
           value={imageIndex}
           onInput={(e) => {
             const number = Number.parseInt(e.target.value);
             if (number >= 0 && number <= imagesLength - 1)
-              setImageIndex(Number.parseInt(e.target.value));
+              setImageIndex(number);
+          }}
+        />
+      </div>
+      <div className="current-speed">
+        Delay:
+        <input
+          type="number"
+          value={speed}
+          onInput={(e) => {
+            const number = Number.parseInt(e.target.value);
+            if (number >= 1) setSpeed(number);
           }}
         />
       </div>

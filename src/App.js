@@ -31,11 +31,11 @@ function App() {
   /**
    * Get list of markers for an image
    * @param {string} imageName
-   * @returns {Array | boolean} List of markers
+   * @returns {Array} List of markers
    */
   const getMarkers = (imageName) => {
     const markerList = markers[imageName];
-    if (!markerList) throw new Error(`Image with name ${imageName} not found`);
+    if (!markerList) return [];
     else return markerList;
   };
 
@@ -61,7 +61,6 @@ function App() {
    */
   const removeMarker = (imageName, markerID) => {
     const markerList = getMarkers(imageName);
-    const marker = getMarker(imageName, markerID); // Throws if marker not found
     markerList.forEach((marker, index) => {
       if (marker.id === markerID) delete markerList[index];
     });

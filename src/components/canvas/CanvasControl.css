@@ -1,8 +1,8 @@
 .canvas-control {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 10rem 1fr;
-  min-width: 40rem;
+  grid-template-columns: 7rem 7rem 1fr;
+  min-width: 41rem;
   border-right: 1px gray solid;
 }
 
@@ -15,5 +15,9 @@
 }
 
 .current-image {
+  margin: auto 0;
+}
+
+.current-speed {
   margin: auto 0;
 }

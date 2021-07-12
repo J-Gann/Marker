@@ -1,4 +1,3 @@
-import Form from "react-bootstrap/Form";
 import "./LoadFiles.css";
 
 const LoadFiles = ({ handleNewImages, handleNewMarkers, markers }) => {
