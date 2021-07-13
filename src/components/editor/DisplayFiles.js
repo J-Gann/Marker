@@ -8,10 +8,10 @@ const DisplayFiles = ({ images, markers, markerOperations }) => {
       <div className="display-files">
         {images.map((image, index) => (
           <FileEntry
-            key={index}
+            key={`FileEntry_image_${image}`}
             index={index}
             image={image}
-            markers={markers}
+            markers={markers[image.name]}
             markerOperations={markerOperations}
           ></FileEntry>
         ))}

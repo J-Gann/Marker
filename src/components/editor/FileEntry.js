@@ -11,9 +11,9 @@ const FileEntry = ({ image, markers, index, markerOperations }) => {
     const addMarker = () =>
       markerOperations.addMarker(
         image.name,
+        Math.floor(Math.random().toString() * 100),
         0,
-        0,
-        Math.floor(Math.random().toString() * 100)
+        0
       );
 
     return (
@@ -27,15 +27,14 @@ const FileEntry = ({ image, markers, index, markerOperations }) => {
 
   const renderFileEntryDetails = () => {
     if (!details) return <></>;
-    const markerList = markerOperations.getMarkers(image.name);
-    if (!markerList) return <div>No Markers</div>;
+    if (!markers) return <div>No Markers</div>;
     return (
       <div className="file-entry__details">
-        {Object.keys(markerOperations.getMarkers(image.name)).map((id) => {
-          const marker = markerOperations.getMarker(image.name, id);
+        {Object.keys(markers).map((id) => {
+          const marker = markers[id];
           return (
             <MarkerEntry
-              key={index}
+              key={`MarkerEntry_image_${image}_marker_${id}`}
               markerId={id}
               marker={marker}
               markerOperations={markerOperations}

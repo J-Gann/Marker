@@ -45,6 +45,7 @@ function App() {
       x: x,
       y: y,
     };
+    setMarkers(markerCopy);
   };
 
   return (

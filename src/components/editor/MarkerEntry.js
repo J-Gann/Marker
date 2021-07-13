@@ -7,8 +7,7 @@ const MarkerEntry = ({ marker, markerId, image, markerOperations }) => {
         <button
           className="fa-remove"
           onClick={() => {
-            console.log("click");
-            markerOperations.removeMarker(image.name, marker.id);
+            markerOperations.removeMarker(image.name, markerId);
           }}
         >
           X
