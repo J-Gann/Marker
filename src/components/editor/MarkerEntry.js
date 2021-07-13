@@ -1,6 +1,6 @@
 import "./MarkerEntry.css";
 
-const MarkerEntry = ({ marker, image, markerOperations }) => {
+const MarkerEntry = ({ marker, markerId, image, markerOperations }) => {
   return (
     <div className="marker-entries">
       <div>
@@ -18,11 +18,11 @@ const MarkerEntry = ({ marker, image, markerOperations }) => {
         <p>id: </p>
         <input
           type="text"
-          value={marker.id}
+          value={markerId}
           onChange={(e) => {
             markerOperations.setMarker(
               image.name,
-              marker.id,
+              markerId,
               marker.x,
               marker.y,
               e.target.value
@@ -38,7 +38,7 @@ const MarkerEntry = ({ marker, image, markerOperations }) => {
           onChange={(e) => {
             markerOperations.setMarker(
               image.name,
-              marker.id,
+              markerId,
               e.target.value,
               marker.y
             );
@@ -53,7 +53,7 @@ const MarkerEntry = ({ marker, image, markerOperations }) => {
           onChange={(e) => {
             markerOperations.setMarker(
               image.name,
-              marker.id,
+              markerId,
               marker.x,
               e.target.value
             );

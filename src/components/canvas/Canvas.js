@@ -52,7 +52,8 @@ const Canvas = ({ images, markers, markerOperations }) => {
 
   const renderMarkers = () => {
     const currentMarkers = markerOperations.getMarkers(img.name);
-    return currentMarkers.map(({ id, x, y }) => {
+    return Object.keys(currentMarkers).map((id) => {
+      const { x, y } = markerOperations.getMarker(img.name, id);
       return (
         <Circle
           key={`marker_${currentImage}_${id}`}
@@ -78,14 +79,12 @@ const Canvas = ({ images, markers, markerOperations }) => {
 
   const renderMarkerLine = (size) => {
     const currentMarkers = markerOperations.getMarkers(img.name);
-    return currentMarkers.map(({ id }) => {
+    return Object.keys(currentMarkers).map((id) => {
       let points1 = [];
       for (let cnt = currentImage - size; cnt <= currentImage; cnt++) {
         const img = images[cnt];
         const currentMarkers = markerOperations.getMarkers(img && img.name);
-        const currentMarker = currentMarkers.filter(
-          (marker) => marker.id === id
-        )[0];
+        const currentMarker = currentMarkers[id];
         if (currentMarker) {
           points1.push(currentMarker["x"] * scale + offsetX);
           points1.push(currentMarker["y"] * scale + offsetY);
@@ -95,9 +94,7 @@ const Canvas = ({ images, markers, markerOperations }) => {
       for (let cnt = currentImage; cnt < currentImage + size + 1; cnt++) {
         const img = images[cnt];
         const currentMarkers = markerOperations.getMarkers(img && img.name);
-        const currentMarker = currentMarkers.filter(
-          (marker) => marker.id === id
-        )[0];
+        const currentMarker = currentMarkers[id];
         if (currentMarker) {
           points2.push(currentMarker["x"] * scale + offsetX);
           points2.push(currentMarker["y"] * scale + offsetY);
@@ -132,8 +129,8 @@ const Canvas = ({ images, markers, markerOperations }) => {
               height={height}
               image={img}
             ></Image>
-            {renderMarkers(10, "red", true)}
             {renderMarkerLine(10, "green")}
+            {renderMarkers(10, "red", true)}
           </Layer>
         </Stage>
       </div>

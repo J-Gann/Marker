@@ -21,7 +21,8 @@
     "build": "react-scripts build && npm run copy",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "copy": "node ./scripts/copyFiles.js"
+    "copy": "node ./scripts/copyFiles.js",
+    "markers": "node ./scripts/createMarkers.js"
   },
   "eslintConfig": {
     "extends": [

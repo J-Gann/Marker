@@ -12,72 +12,39 @@ function App() {
   const handleNewImages = (newImages) => setImages(newImages);
   const handleNewMarkers = (newMarkers) => setMarkers(newMarkers);
 
-  /**
-   * Get the marker for an image and markerID
-   * @param {string} imageName
-   * @param {string} markerID
-   * @returns {Object | boolean} Marker
-   */
-  const getMarker = (imageName, markerID) => {
-    const markersList = getMarkers(imageName);
-    const markerList = markersList.filter((marker) => marker.id === markerID);
-    if (markerList.length > 1)
-      console.warn("Multiple Markers with the same ID found");
-    if (markerList.length === 0)
-      throw new Error(`Marker with ID ${markerID} not found`);
-    if (markerList.length === 1) return markerList[0];
+  const getMarker = (imageTitle, markerID) => markers[imageTitle][markerID];
+
+  const setMarker = (imageTitle, markerID, x, y, newID) => {
+    const markerCopy = { ...markers };
+    if (!newID) {
+      let marker = markerCopy[imageTitle][markerID];
+      if (x) marker.x = x;
+      if (y) marker.y = y;
+    } else if (newID) {
+      delete markerCopy[imageTitle][markerID];
+      markerCopy[imageTitle][newID] = {
+        x: x,
+        y: y,
+      };
+    }
+    setMarkers(markerCopy);
   };
 
-  /**
-   * Get list of markers for an image
-   * @param {string} imageName
-   * @returns {Array} List of markers
-   */
-  const getMarkers = (imageName) => {
-    const markerList = markers[imageName];
-    if (!markerList) return [];
-    else return markerList;
+  const getMarkers = (imageTitle) =>
+    markers[imageTitle] ? markers[imageTitle] : [];
+
+  const removeMarker = (imageTitle, markerID) => {
+    const markerCopy = { ...markers };
+    delete markerCopy[imageTitle][markerID];
+    setMarkers(markerCopy);
   };
 
-  /**
-   * Change content of an existing marker
-   * @param {string} imageName
-   * @param {string} markerID
-   * @param {number} x
-   * @param {number} y
-   */
-  const setMarker = (imageName, markerID, x, y, newID) => {
-    const marker = getMarker(imageName, markerID);
-    if (x) marker.x = x;
-    if (y) marker.y = y;
-    if (newID) marker.id = newID;
-    setMarkers({ ...markers });
-  };
-
-  /**
-   * Remove a marker
-   * @param {string} imageName
-   * @param {string} markerID
-   */
-  const removeMarker = (imageName, markerID) => {
-    const markerList = getMarkers(imageName);
-    markerList.forEach((marker, index) => {
-      if (marker.id === markerID) delete markerList[index];
-    });
-    setMarkers({ ...markers });
-  };
-
-  /**
-   * Add a new marker
-   * @param {string} imageName
-   * @param {string} markerID
-   * @param {number} x
-   * @param {number} y
-   */
-  const addMarker = (imageName, markerID, x, y) => {
-    const markerList = getMarkers(imageName);
-    markerList.push({ id: markerID, x: x, y: y });
-    setMarkers({ ...markers });
+  const addMarker = (imageTitle, markerID, x, y) => {
+    const markerCopy = { ...markers };
+    markerCopy[imageTitle][markerID] = {
+      x: x,
+      y: y,
+    };
   };
 
   return (
