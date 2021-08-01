@@ -26,13 +26,18 @@ const LoadFiles = ({ handleNewImages, handleNewMarkers, markers }) => {
   const handleLoadImages = async (files) => {
     let awaitList = [];
     let nameList = [];
+    // read all selected files as an URL
     for (var i = 0; i < files.length; i++) {
+      // asynchronously load image file
       awaitList.push(readFileAsyncURL(files[i]));
+      // in same order as images, store image name
       nameList.push(files[i].name);
     }
+    // wait for all load operations to resolve
     const urlList = await Promise.all(awaitList);
     awaitList = [];
     const imageList = [];
+    // asynchronously compile all loaded images to the Image object
     for (var e = 0; e < urlList.length; e++) {
       let image = new Image();
       imageList.push(image);
@@ -43,11 +48,15 @@ const LoadFiles = ({ handleNewImages, handleNewMarkers, markers }) => {
       );
       image.src = urlList[e];
     }
+    // wait for all operations to resolve
     await Promise.all(awaitList);
+    // add image name to images
     imageList.forEach((image, index) => {
       imageList[index].name = nameList[index];
     });
+    // sort images by name
     imageList.sort();
+    // transmit images to "app" component through callback
     handleNewImages(imageList);
   };
 

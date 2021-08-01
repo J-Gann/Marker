@@ -8,12 +8,16 @@ const CanvasControl = ({ setCurrentImage, imagesLength }) => {
   const [repeat, setRepeat] = useState(true);
   const [speed, setSpeed] = useState(40);
 
+  // Effect to increment image index automatically
   useEffect(() => {
+    // Set interval for incrementing image index
     const intervalID = window.setInterval(() => {
       if (imagesLength) {
+        // If play is turned on and next image exists, increment image index
         if (play && imagesLength > imageIndex) {
           setImageIndex((oldIndex) => oldIndex + 1);
         } else if (imagesLength === imageIndex && repeat) {
+          // If next image does not exist, set back image inex to 0
           setImageIndex(() => 0);
         }
       }
