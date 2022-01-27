@@ -11,3 +11,5 @@ solution, describes details about the implementation of the new application
 and explains the reason for software design decisions. The functionality of the
 application in regard to its main use case is described. The report closes with
 an outlook on further improvements.
+
+See the [report](./Praktikum_React.pdf) for more information.
