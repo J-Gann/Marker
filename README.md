@@ -1,4 +1,5 @@
 # Marker-Tracking Application
+
 This is a report about the advanced internship ”Frontendentwicklung in React”
 (Frontend Development in React). The purpose of the internship was to gain
 experience in developing applications with the frontend development framework
@@ -13,3 +14,5 @@ application in regard to its main use case is described. The report closes with
 an outlook on further improvements.
 
 See the [report](./Praktikum_React.pdf) for more information.
+
+![preview](./preview.mov)
