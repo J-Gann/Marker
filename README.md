@@ -14,5 +14,3 @@ application in regard to its main use case is described. The report closes with
 an outlook on further improvements.
 
 See the [report](./Praktikum_React.pdf) for more information.
-
-![preview](./preview.mov)
