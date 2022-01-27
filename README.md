@@ -15,4 +15,4 @@ an outlook on further improvements.
 
 See the [report](./Praktikum_React.pdf) for more information.
 
-https://user-images.githubusercontent.com/10835387/151417036-f4b65779-ae16-4850-91f3-122a232904c4.mp4
+https://user-images.githubusercontent.com/10835387/151417397-a26d1a50-d5a9-49b9-b4ca-45efe3700cc1.mp4
