@@ -1,6 +1,6 @@
 # Marker-Tracking Application
 
-This is a report about the advanced internship ”Frontendentwicklung in React”
+This repository contains the code for the advanced internship ”Frontendentwicklung in React”
 (Frontend Development in React). The purpose of the internship was to gain
 experience in developing applications with the frontend development framework
 for web-apps called React. As part of the internship, the development of an
