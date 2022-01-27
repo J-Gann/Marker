@@ -14,3 +14,5 @@ application in regard to its main use case is described. The report closes with
 an outlook on further improvements.
 
 See the [report](./Praktikum_React.pdf) for more information.
+
+https://user-images.githubusercontent.com/10835387/151406912-2d60f04f-9388-4f74-91d4-c1aa7019a1d0.mp4
